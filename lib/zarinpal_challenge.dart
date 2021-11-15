@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:github_challenge/presentation/core/size_config.dart';
 import 'package:github_challenge/presentation/home/home_page.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -13,6 +14,7 @@ class ZarinPalChallenge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return BlocProvider<SettingBloc>(
       create: (context) => sl<SettingBloc>(),
       child: BlocBuilder<SettingBloc, SettingState>(
@@ -22,6 +24,7 @@ class ZarinPalChallenge extends StatelessWidget {
   }
 
   Widget _buildWithTheme(BuildContext context, SettingState state) {
+    
     return MaterialApp(
       home: HomePage(),
       builder: (context, widget) => ResponsiveWrapper.builder(widget!,
