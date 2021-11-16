@@ -9,5 +9,5 @@ class RemoteDataSource {
   RemoteDataSource(this._apiCallHandler);
 
   Future<UserDto> getUserInfo({required String userName}) async =>
-      await _apiCallHandler.get(url: 'users/$userName');
+      UserDto.fromJson(await _apiCallHandler.get(url: 'users/$userName'));
 }

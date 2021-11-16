@@ -17,6 +17,11 @@ final appThemeData = {
         fontWeight: FontWeight.bold,
         fontSize: 24
       ),
+        headline2: TextStyle(
+        color: Colors.blue,
+        fontWeight: FontWeight.bold,
+        fontSize: 22
+      ),
       subtitle1: TextStyle(
         color: Color(0xff212121),
         fontWeight: FontWeight.w600,

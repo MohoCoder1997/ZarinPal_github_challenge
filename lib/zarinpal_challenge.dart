@@ -6,6 +6,7 @@ import 'package:github_challenge/presentation/home/home_page.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'application/setting/bloc/setting_bloc.dart';
+import 'application/user/bloc/user_bloc.dart';
 import 'injection_container/injection.dart';
 import 'presentation/core/localization/app_localizations.dart';
 
@@ -26,7 +27,10 @@ class ZarinPalChallenge extends StatelessWidget {
   Widget _buildWithTheme(BuildContext context, SettingState state) {
     
     return MaterialApp(
-      home: HomePage(),
+      home: BlocProvider(
+        create: (context) => sl<UserBloc>(),
+        child: HomePage(),
+      ),
       builder: (context, widget) => ResponsiveWrapper.builder(widget!,
           maxWidth: 1200,
           minWidth: 450,

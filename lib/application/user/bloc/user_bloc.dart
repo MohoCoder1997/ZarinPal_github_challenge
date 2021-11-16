@@ -11,13 +11,14 @@ part 'user_state.dart';
 @Injectable()
 class UserBloc extends Bloc<UserEvent, UserState> {
   final IRepository _repository;
-  UserBloc(this._repository) : super(UserLoadInProgress());
+  UserBloc(this._repository) : super(UserStateInital());
 
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {
+    yield UserLoadInProgress();
     if (event is UserFetchedData) {
       final _result = await _repository.getUserInfo(userName: event.userName);
-     yield _result.fold(
+      yield _result.fold(
         (fail) => UserLoadFailure(fail: fail, userName: event.userName),
         (user) => UserLoadSuccess(user: user),
       );

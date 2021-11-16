@@ -7,7 +7,7 @@ part 'user_dto.g.dart';
 @JsonSerializable()
 class UserDto extends User {
   @JsonKey(name: 'id')
-  final String id;
+  final int id;
   @JsonKey(name: 'node_id')
   final String nodeId;
   @JsonKey(name: 'gravatar_id')

@@ -12,13 +12,16 @@ class ApiCallHandler {
   delete({required String url, Map? header, body}) {}
 
   get({required String url, header}) async {
+    print(_dio.options.baseUrl + url);
     final response = await _dio
-        .post(url, options: Options(headers: header != null ? header : null))
+        .get(url, options: Options(headers: header != null ? header : null))
         .onError((error, stackTrace) {
+
       if (error is DioError) {
+
         if (error.response != null)
           throw UnknowFail(
-              message: jsonDecode(error.response?.data)['Message'] ??
+              message: error.response?.data['message'] ??
                   'The server could not respond');
         throw UnknowFail(message: 'The server could not respond');
       } else
@@ -26,7 +29,8 @@ class ApiCallHandler {
     });
 
     if (response.statusCode == 200) {
-      var jasonObject = json.decode(response.data as String);
+
+      var jasonObject = response.data;
       return jasonObject;
     } else {
       throw UnknowFail(

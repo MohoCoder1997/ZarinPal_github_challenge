@@ -8,7 +8,7 @@ part of 'user_dto.dart';
 
 UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
   return UserDto(
-    json['id'] as String,
+    json['id'] as int,
     json['node_id'] as String,
     json['gravatar_id'] as String?,
     json['url'] as String?,
