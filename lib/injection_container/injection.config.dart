@@ -4,7 +4,7 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-import 'package:dio/dio.dart' as _i9;
+import 'package:dio/dio.dart' as _i10;
 import 'package:flutter/material.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
@@ -13,11 +13,16 @@ import 'package:internet_connection_checker/internet_connection_checker.dart'
 import 'package:intl/intl.dart' as _i6;
 import 'package:shared_preferences/shared_preferences.dart' as _i8;
 
-import '../application/setting/bloc/setting_bloc.dart' as _i10;
+import '../application/setting/bloc/setting_bloc.dart' as _i11;
+import '../domain/repository/i_repository.dart' as _i14;
+import '../infrastructure/core/api_call_handler.dart' as _i12;
+import '../infrastructure/core/connection_checker.dart' as _i9;
+import '../infrastructure/datasources/remote_data_source.dart' as _i13;
+import '../infrastructure/repository/repository_impl.dart' as _i15;
 import '../presentation/core/localization/app_localization_delegate.dart'
     as _i5;
 import '../presentation/core/localization/app_localizations.dart' as _i3;
-import 'register_module.dart' as _i11; // ignore_for_file: unnecessary_lambdas
+import 'register_module.dart' as _i16; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -38,11 +43,19 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<String>(() => registerModule.baseUrl, instanceName: 'BaseUrl');
   gh.factory<String>(() => registerModule.datePattern,
       instanceName: 'DatePattern');
-  gh.lazySingleton<_i9.Dio>(
+  gh.lazySingleton<_i9.ConnectionChecker>(
+      () => _i9.ConnectionChecker(get<_i7.InternetConnectionChecker>()));
+  gh.lazySingleton<_i10.Dio>(
       () => registerModule.dio(get<String>(instanceName: 'BaseUrl')));
-  gh.factory<_i10.SettingBloc>(
-      () => _i10.SettingBloc(get<_i8.SharedPreferences>()));
+  gh.factory<_i11.SettingBloc>(
+      () => _i11.SettingBloc(get<_i8.SharedPreferences>()));
+  gh.lazySingleton<_i12.ApiCallHandler>(
+      () => _i12.ApiCallHandler(get<_i10.Dio>()));
+  gh.singleton<_i13.RemoteDataSource>(
+      _i13.RemoteDataSource(get<_i12.ApiCallHandler>()));
+  gh.singleton<_i14.IRepository>(_i15.RepositoryImpl(
+      get<_i13.RemoteDataSource>(), get<_i9.ConnectionChecker>()));
   return get;
 }
 
-class _$RegisterModule extends _i11.RegisterModule {}
+class _$RegisterModule extends _i16.RegisterModule {}
