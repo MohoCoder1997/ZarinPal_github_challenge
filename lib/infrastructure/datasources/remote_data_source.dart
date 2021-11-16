@@ -16,17 +16,21 @@ class RemoteDataSource {
 
   Future<List<RepoDto>> getRepoInfo({required String userName}) async {
     _shownPagesCount++;
+    final List<RepoDto> _repoList = [];
     final _result = await _apiCallHandler.get(
       url:
           'users/$userName/repos?page=$_shownPagesCount&per_page=$ITEMS_PER_PAGE',
     );
     if ((_result as List).length != 0) {
-      final List<RepoDto> _repoList = [];
       _result.forEach((repo) {
         _result.add(RepoDto.fromJson(repo));
       });
       return _repoList;
-    }else
-    throw NoNextPageFail(message: 'End of Items');
+    } else {
+      if (_shownPagesCount == 1)
+        return _repoList;
+      else
+        throw NoNextPageFail(message: 'End of Items');
+    }
   }
 }
