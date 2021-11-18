@@ -19,3 +19,16 @@ class RepoFetchedData extends RepoEvent {
         userName,
       ];
 }
+
+class RepoFetchedNextPage extends RepoEvent {
+  final String userName;
+
+  RepoFetchedNextPage({
+    required this.userName,
+  });
+
+  @override
+  List<Object> get props => [
+        userName,
+      ];
+}

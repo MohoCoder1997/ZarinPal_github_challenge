@@ -27,7 +27,6 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
     json['blog'] as String?,
     json['email'] as String?,
     json['hireable'] as bool?,
-    json['public_repos'] as int?,
     json['public_gists'] as int?,
     dateTimeFromJson(json['updated_at'] as String?),
     usreName: json['login'] as String,
@@ -39,6 +38,7 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
     twitterUsername: json['twitter_username'] as String?,
     followers: json['followers'] as int,
     following: json['following'] as int,
+    publicRepos: json['public_repos'] as int,
     createdAt: dateTimeFromJson(json['created_at'] as String?),
   );
 }
@@ -53,6 +53,7 @@ Map<String, dynamic> _$UserDtoToJson(UserDto instance) => <String, dynamic>{
       'twitter_username': instance.twitterUsername,
       'followers': instance.followers,
       'following': instance.following,
+      'public_repos': instance.publicRepos,
       'created_at': dateTimetojson(instance.createdAt),
       'id': instance.id,
       'node_id': instance.nodeId,
@@ -73,7 +74,6 @@ Map<String, dynamic> _$UserDtoToJson(UserDto instance) => <String, dynamic>{
       'blog': instance.blog,
       'email': instance.email,
       'hireable': instance.hireable,
-      'public_repos': instance.publicRepos,
       'public_gists': instance.publicGists,
       'updated_at': dateTimetojson(instance.updatedAt),
     };

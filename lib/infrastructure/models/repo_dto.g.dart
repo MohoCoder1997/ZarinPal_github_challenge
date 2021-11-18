@@ -10,7 +10,7 @@ RepoDto _$RepoDtoFromJson(Map<String, dynamic> json) {
   return RepoDto(
     json['id'] as int,
     json['node_id'] as String,
-    json['full_name'] as int,
+    json['full_name'] as String,
     json['private'] as bool,
     json['html_url'] as String?,
     json['fork'] as bool?,
@@ -40,7 +40,7 @@ RepoDto _$RepoDtoFromJson(Map<String, dynamic> json) {
     forksCount: json['forks_count'] as int?,
     topics: (json['topics'] as List<dynamic>).map((e) => e as String).toList(),
     visibility: json['visibility'] as String,
-    watchers: json['watchers'] as String?,
+    watchers: json['watchers'] as int?,
   );
 }
 

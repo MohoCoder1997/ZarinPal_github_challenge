@@ -11,7 +11,7 @@ class RepoDto extends Repo {
   @JsonKey(name: 'node_id')
   final String nodeId;
   @JsonKey(name: 'full_name')
-  final int fullName;
+  final String fullName;
   @JsonKey(name: 'private')
   final bool private;
   @JsonKey(name: 'html_url')
@@ -95,7 +95,7 @@ class RepoDto extends Repo {
     required int? forksCount,
     required List<String> topics,
     required String visibility,
-    required String? watchers,
+    required int? watchers,
   }) : super(
           name: name,
           description: description,

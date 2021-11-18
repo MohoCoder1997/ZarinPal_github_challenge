@@ -7,15 +7,14 @@ import 'package:github_challenge/infrastructure/core/connection_checker.dart';
 import 'package:github_challenge/infrastructure/datasources/remote_data_source.dart';
 import 'package:injectable/injectable.dart';
 
-
-@Singleton(as: IRepository) 
+@Singleton(as: IRepository)
 class RepositoryImpl extends IRepository {
   final RemoteDataSource _remoteDataSource;
   final ConnectionChecker _conectionChecker;
 
   RepositoryImpl(
     this._remoteDataSource,
-    this._conectionChecker,   
+    this._conectionChecker,
   );
   @override
   Future<Either<HttpFail, User>> getUserInfo({required String userName}) async {
@@ -31,10 +30,16 @@ class RepositoryImpl extends IRepository {
   }
 
   @override
-  Future<Either<HttpFail, List<Repo>>> getRepoInfo({required String userName}) async{
+  Future<Either<HttpFail, List<Repo>>> getRepoInfo({
+    required String userName,
+    required bool isNewLoad,
+  }) async {
     if (await _conectionChecker.isConnected) {
       try {
-        return Right(await _remoteDataSource.getRepoInfo(userName: userName));
+        return Right(await _remoteDataSource.getRepoInfo(
+          userName: userName,
+          isNewLoad: isNewLoad,
+        ));
       } on HttpFail catch (e) {
         return Left(e);
       }

@@ -19,9 +19,12 @@ class User extends Equatable {
   final String? twitterUsername;
   @JsonKey(name: 'followers')
   final int followers;
-  @JsonKey(name: 'following') 
+  @JsonKey(name: 'following')
   final int following;
-  @JsonKey(name: 'created_at' , toJson: dateTimetojson , fromJson: dateTimeFromJson)
+  @JsonKey(name: 'public_repos')
+  final int? publicRepos;
+  @JsonKey(
+      name: 'created_at', toJson: dateTimetojson, fromJson: dateTimeFromJson)
   final DateTime? createdAt;
 
   User({
@@ -34,6 +37,7 @@ class User extends Equatable {
     required this.twitterUsername,
     required this.followers,
     required this.following,
+    required this.publicRepos,
     required this.createdAt,
   });
 
@@ -48,6 +52,7 @@ class User extends Equatable {
         twitterUsername,
         followers,
         following,
+        publicRepos,
         createdAt,
       ];
 }

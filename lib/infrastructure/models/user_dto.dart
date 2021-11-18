@@ -44,8 +44,6 @@ class UserDto extends User {
   final String? email;  
   @JsonKey(name: 'hireable')
   final bool? hireable;
-  @JsonKey(name: 'public_repos')
-  final int? publicRepos;
   @JsonKey(name: 'public_gists')
   final int? publicGists;
   @JsonKey(name: 'updated_at' , toJson: dateTimetojson , fromJson: dateTimeFromJson)
@@ -71,7 +69,7 @@ class UserDto extends User {
     this.blog,
     this.email,
     this.hireable,
-    this.publicRepos,
+  
     this.publicGists,
     this.updatedAt, {
     required String usreName,
@@ -83,6 +81,7 @@ class UserDto extends User {
     required String? twitterUsername,
     required int followers,
     required int following,
+    required int publicRepos,
     required DateTime? createdAt,
   }) : super(
           usreName: usreName,
@@ -94,6 +93,7 @@ class UserDto extends User {
           twitterUsername: twitterUsername,
           followers: followers,
           following: following,
+          publicRepos: publicRepos,
           createdAt: createdAt,
         );
 

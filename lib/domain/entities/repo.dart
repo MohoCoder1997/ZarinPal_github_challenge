@@ -15,7 +15,7 @@ class Repo extends Equatable {
   @JsonKey(name: 'visibility')
   final String visibility;
   @JsonKey(name: 'watchers')
-  final String? watchers;
+  final int? watchers;
 
   Repo({
     required this.name,
