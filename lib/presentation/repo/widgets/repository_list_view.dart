@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_challenge/application/repo/bloc/repo_bloc.dart';
 import 'package:github_challenge/domain/entities/user.dart';
 import 'package:github_challenge/presentation/core/load_fail_view.dart';
+import 'package:github_challenge/presentation/core/localization/app_localizations.dart';
+import 'package:github_challenge/presentation/core/localization/lang/lang_keys.dart';
 import 'package:github_challenge/presentation/core/size_config.dart';
 import 'package:github_challenge/presentation/repo/widgets/repo_card.dart';
 
@@ -42,11 +44,11 @@ class _RepositoryListViewState extends State<RepositoryListView> {
   Center _loadInProgressView() => Center(child: CircularProgressIndicator());
 
   Center _dataIsEmptyView() => Center(
-        child: Text('There is no repository'),
+        child: Text(AppLocalizations.of(context)!.translate(LangKeys.NO_REPOSITORY)),
       );
 
   LoadFailureView _loadFailureView(RepoLoadFailure state) => LoadFailureView(
-        message: state.fail.message ?? 'Load Failed ... ',
+        message: state.fail.message ?? AppLocalizations.of(context)!.translate(LangKeys.LOAD_FAILED),
         onTapTryAgain: () {
           _repoBloc.add(RepoFetchedData(
             userName: state.userName,
@@ -108,7 +110,7 @@ class _RepositoryListViewState extends State<RepositoryListView> {
             ),
           )
         : LoadFailureView(
-            message: state.fail!.message ?? 'Load Failed ',
+            message: state.fail!.message ?? AppLocalizations.of(context)!.translate(LangKeys.LOAD_FAILED),
             onTapTryAgain: () {
               _repoBloc
                   .add(RepoFetchedNextPage(userName: widget.user.usreName));

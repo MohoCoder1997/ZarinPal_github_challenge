@@ -22,6 +22,11 @@ final appThemeData = {
         fontWeight: FontWeight.bold,
         fontSize: 22
       ),
+       headline3: TextStyle(
+        color: Colors.blue,
+        fontWeight: FontWeight.bold,
+        fontSize: 22
+      ),
       subtitle1: TextStyle(
         color: Color(0xff212121),
         fontWeight: FontWeight.w600,
@@ -52,6 +57,11 @@ final appThemeData = {
       ),
         headline2: TextStyle(
         color: Colors.white70,
+        fontWeight: FontWeight.bold,
+        fontSize: 22
+      ),
+       headline3: TextStyle(
+        color: Colors.white,
         fontWeight: FontWeight.bold,
         fontSize: 22
       ),

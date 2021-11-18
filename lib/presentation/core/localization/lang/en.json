@@ -1,4 +1,13 @@
 {
     "user_name" : "UserName",
-    "pass_word" : "Password"
+    "github_title" : "GitHub Api",
+    "load_failed" : "Load Failed",
+    "search_btn_txt" : "Search",
+    "repo_app_bar_txt" : "UserInfo",
+    "public_repos" : "publicRepos",
+    "following" : "following",
+    "followers" : "followers",
+    "no_ropository" : "There is no repository",
+    "try_again" : "Try Again",
+    "snack_bar_txt" : "Please Enter Your UserName"
 }

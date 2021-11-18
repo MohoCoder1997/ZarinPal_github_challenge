@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:github_challenge/domain/entities/user.dart';
 import 'package:github_challenge/presentation/core/app_bar_view.dart';
+import 'package:github_challenge/presentation/core/localization/app_localizations.dart';
+import 'package:github_challenge/presentation/core/localization/lang/lang_keys.dart';
 import 'package:github_challenge/presentation/core/size_config.dart';
 import 'package:github_challenge/presentation/repo/widgets/repository_list_view.dart';
 import 'widgets/user_image_oval.dart';
@@ -19,7 +21,7 @@ class RepoPage extends StatelessWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        title: AppBarView(title: 'UserInfo'),
+        title: AppBarView(title: AppLocalizations.of(context)!.translate(LangKeys.REPO_APP_BAR_TXT)),
         centerTitle: true,
       ),
       body: Column(
@@ -59,7 +61,7 @@ class RepoPage extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'publicRepos',
+          AppLocalizations.of(context)!.translate(LangKeys.PUBLIC_REPOS),
           style: Theme.of(context).textTheme.subtitle1,
         ),
         Text(
@@ -74,7 +76,7 @@ class RepoPage extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'following',
+          AppLocalizations.of(context)!.translate(LangKeys.FOLLOWING),
           style: Theme.of(context).textTheme.subtitle1,
         ),
         Text(
@@ -89,7 +91,7 @@ class RepoPage extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'followers',
+          AppLocalizations.of(context)!.translate(LangKeys.FOLLOWER),
           style: Theme.of(context).textTheme.subtitle1,
         ),
         Text(

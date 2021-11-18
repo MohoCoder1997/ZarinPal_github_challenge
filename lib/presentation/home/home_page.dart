@@ -5,15 +5,14 @@ import 'package:github_challenge/application/setting/bloc/setting_bloc.dart';
 import 'package:github_challenge/application/user/bloc/user_bloc.dart';
 import 'package:github_challenge/injection_container/injection.dart';
 import 'package:github_challenge/presentation/core/app_bar_view.dart';
-import 'package:github_challenge/presentation/core/app_themes.dart';
 import 'package:github_challenge/presentation/core/load_fail_view.dart';
+import 'package:github_challenge/presentation/core/localization/app_localizations.dart';
+import 'package:github_challenge/presentation/core/localization/lang/lang_keys.dart';
 import 'package:github_challenge/presentation/core/navigation_handler.dart';
 import 'package:github_challenge/presentation/core/size_config.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:github_challenge/presentation/repo/repo_page.dart';
-import 'package:simple_animations/simple_animations.dart';
 
-import 'widget/them_mode_bottun.dart';
+import 'widget/theme_mode_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -38,9 +37,31 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: AppBarView(
-          title: 'GitHubApi',
+          title: AppLocalizations.of(context)!.translate(LangKeys.GITHUB_TITLE),
         ),
         leading: ThemeModeBottun(),
+        actions: [
+          // Locale('en', 'US'),
+          // Locale('fa', 'IR'),
+          IconButton(
+            onPressed: () {
+              if (context.read<SettingBloc>().state.locale ==
+                  Locale('en', 'US'))
+                context
+                    .read<SettingBloc>()
+                    .add(ChangedLocale(locale: Locale('fa', 'IR')));
+              else {
+                context
+                    .read<SettingBloc>()
+                    .add(ChangedLocale(locale: Locale('en', 'US')));
+              }
+            },
+            icon: Icon(
+              Icons.language_outlined,
+              size: 30,
+            ),
+          )
+        ],
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -95,7 +116,8 @@ class _HomePageState extends State<HomePage> {
           );
         if (state is UserLoadFailure)
           return LoadFailureView(
-            message: state.fail.message ?? 'Load Failed ',
+            message: state.fail.message ??
+                AppLocalizations.of(context)!.translate(LangKeys.LOAD_FAILED),
             onTapTryAgain: () {
               _userBloc.add(UserFetchedData(userName: state.userName));
             },
@@ -122,7 +144,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                 },
-          child: Text('serch'),
+          child: Text(
+              AppLocalizations.of(context)!.translate(LangKeys.SEARCH_BTN_TXT)),
         );
       },
     );
@@ -138,7 +161,7 @@ class _HomePageState extends State<HomePage> {
         SizedBox(
           width: SC.blockHorizontal * 2,
         ),
-        Text('Please Enter Your UserName'),
+        Text(AppLocalizations.of(context)!.translate(LangKeys.SNACK_BAR_TXT)),
       ],
     );
   }
@@ -147,7 +170,7 @@ class _HomePageState extends State<HomePage> {
     return TextField(
       decoration: InputDecoration(
         border: OutlineInputBorder(),
-        labelText: 'UserName',
+        labelText: AppLocalizations.of(context)!.translate(LangKeys.USER_NAME),
       ),
       controller: _textEditingController,
     );
@@ -167,5 +190,3 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 }
-
-

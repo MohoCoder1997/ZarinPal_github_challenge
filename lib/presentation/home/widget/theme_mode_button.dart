@@ -10,10 +10,10 @@ class ThemeModeBottun extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ThemeModeBottunState createState() => _ThemeModeBottunState();
+  _ThemeModeButtonState createState() => _ThemeModeButtonState();
 }
 
-class _ThemeModeBottunState extends State<ThemeModeBottun> {
+class _ThemeModeButtonState extends State<ThemeModeBottun> {
   bool isChangedMode = false;
   bool? isDarkMode;
   @override

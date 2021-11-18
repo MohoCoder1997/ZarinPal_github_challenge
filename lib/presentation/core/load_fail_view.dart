@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:github_challenge/presentation/core/localization/app_localizations.dart';
+import 'package:github_challenge/presentation/core/localization/lang/lang_keys.dart';
 
 class LoadFailureView extends StatelessWidget {
   const LoadFailureView({
@@ -24,8 +26,8 @@ class LoadFailureView extends StatelessWidget {
                     text: message,
                     style: Theme.of(context).textTheme.subtitle1),
                 TextSpan(
-                  text: '   Try Again',
-                  style: Theme.of(context).textTheme.headline2,
+                  text: AppLocalizations.of(context)!.translate(LangKeys.TRY_AGAIN),
+                  style: Theme.of(context).textTheme.headline3,
                   recognizer: TapGestureRecognizer()..onTap = onTapTryAgain,
                 )
               ],
