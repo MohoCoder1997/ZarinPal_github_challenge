@@ -15,6 +15,7 @@ class RepoCard extends StatelessWidget {
       height: SC.blockVertical * 15,
       child: Card(
         elevation: 4,
+        color: Theme.of(context).primaryColorLight,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(26))),
         child: Padding(

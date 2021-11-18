@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_challenge/application/repo/bloc/repo_bloc.dart';
+import 'package:github_challenge/application/setting/bloc/setting_bloc.dart';
 import 'package:github_challenge/application/user/bloc/user_bloc.dart';
 import 'package:github_challenge/injection_container/injection.dart';
 import 'package:github_challenge/presentation/core/app_bar_view.dart';
+import 'package:github_challenge/presentation/core/app_themes.dart';
 import 'package:github_challenge/presentation/core/load_fail_view.dart';
 import 'package:github_challenge/presentation/core/navigation_handler.dart';
 import 'package:github_challenge/presentation/core/size_config.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:github_challenge/presentation/repo/repo_page.dart';
+import 'package:simple_animations/simple_animations.dart';
+
+import 'widget/them_mode_bottun.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -35,6 +40,7 @@ class _HomePageState extends State<HomePage> {
         title: AppBarView(
           title: 'GitHubApi',
         ),
+        leading: ThemeModeBottun(),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -161,3 +167,5 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 }
+
+
