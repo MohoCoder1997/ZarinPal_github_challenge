@@ -43,7 +43,7 @@ class ZarinPalChallenge extends StatelessWidget {
             ResponsiveBreakpoint.autoScale(2460, name: "4K"),
           ]),
       debugShowCheckedModeBanner: false,
-      title: 'Neco',
+      title: 'ZarinPalChallenge',
       supportedLocales: [
         Locale('en', 'US'),
         Locale('fa', 'IR'),
