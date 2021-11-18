@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:github_challenge/presentation/core/size_config.dart';
 import 'package:github_challenge/presentation/home/home_page.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
