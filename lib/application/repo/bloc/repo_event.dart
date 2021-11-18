@@ -8,27 +8,23 @@ abstract class RepoEvent extends Equatable {
 }
 
 class RepoFetchedData extends RepoEvent {
-  final String userName;
 
- const RepoFetchedData({
-    required this.userName,
-  });
+
+ const RepoFetchedData();
 
   @override
   List<Object> get props => [
-        userName,
+
       ];
 }
 
 class RepoFetchedNextPage extends RepoEvent {
-  final String userName;
 
- const RepoFetchedNextPage({
-    required this.userName,
-  });
+
+ const RepoFetchedNextPage();
 
   @override
   List<Object> get props => [
-        userName,
+
       ];
 }

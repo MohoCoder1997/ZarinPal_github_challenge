@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:github_challenge/presentation/home/home_page.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
+import 'application/auth/bloc/auth_bloc.dart';
 import 'application/setting/bloc/setting_bloc.dart';
 import 'application/user/bloc/user_bloc.dart';
 import 'injection_container/injection.dart';
@@ -14,7 +15,6 @@ class ZarinPalChallenge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return BlocProvider<SettingBloc>(
       create: (context) => sl<SettingBloc>(),
       child: BlocBuilder<SettingBloc, SettingState>(
@@ -24,10 +24,19 @@ class ZarinPalChallenge extends StatelessWidget {
   }
 
   Widget _buildWithTheme(BuildContext context, SettingState state) {
-    
     return MaterialApp(
-      home: BlocProvider(
-        create: (context) => sl<UserBloc>(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => sl<UserBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => sl<AuthBloc>()
+              ..add(
+                AuthFetchdToken(),
+              ),
+          ),
+        ],
         child: HomePage(),
       ),
       builder: (context, widget) => ResponsiveWrapper.builder(widget!,
@@ -57,7 +66,6 @@ class ZarinPalChallenge extends StatelessWidget {
       },
       locale: state.locale,
       theme: state.themeData,
-      
     );
   }
 }

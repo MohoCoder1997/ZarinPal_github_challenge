@@ -1,3 +1,5 @@
+import 'package:github_challenge/domain/entities/login_device.dart';
+import 'package:github_challenge/domain/entities/access_token.dart';
 import 'package:github_challenge/domain/entities/repo.dart';
 import 'package:github_challenge/domain/entities/user.dart';
 import 'package:github_challenge/domain/core/failure_response.dart';
@@ -17,10 +19,10 @@ class RepositoryImpl extends IRepository {
     this._conectionChecker,
   );
   @override
-  Future<Either<HttpFail, User>> getUserInfo({required String userName}) async {
+  Future<Either<HttpFail, User>> getUserInfo() async {
     if (await _conectionChecker.isConnected) {
       try {
-        return Right(await _remoteDataSource.getUserInfo(userName: userName));
+        return Right(await _remoteDataSource.getUserInfo());
       } on HttpFail catch (e) {
         return Left(e);
       }
@@ -31,15 +33,39 @@ class RepositoryImpl extends IRepository {
 
   @override
   Future<Either<HttpFail, List<Repo>>> getRepoInfo({
-    required String userName,
     required bool isNewLoad,
   }) async {
     if (await _conectionChecker.isConnected) {
       try {
         return Right(await _remoteDataSource.getRepoInfo(
-          userName: userName,
           isNewLoad: isNewLoad,
         ));
+      } on HttpFail catch (e) {
+        return Left(e);
+      }
+    } else {
+      return Left(NoConectionFail(message: 'NoConnection ...'));
+    }
+  }
+
+  @override
+  Future<Either<HttpFail, AccessToken>> getAccessToken() async {
+    if (await _conectionChecker.isConnected) {
+      try {
+        return Right(await _remoteDataSource.getAccessToken());
+      } on HttpFail catch (e) {
+        return Left(e);
+      }
+    } else {
+      return Left(NoConectionFail(message: 'NoConnection ...'));
+    }
+  }
+
+  @override
+  Future<Either<HttpFail, LoginDevice>> loginDevice() async {
+    if (await _conectionChecker.isConnected) {
+      try {
+        return Right(await _remoteDataSource.loginDevice());
       } on HttpFail catch (e) {
         return Left(e);
       }

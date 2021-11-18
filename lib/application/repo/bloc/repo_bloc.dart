@@ -17,11 +17,11 @@ class RepoBloc extends Bloc<RepoEvent, RepoState> {
   @override
   Stream<RepoState> mapEventToState(RepoEvent event) async* {
     if (event is RepoFetchedData) {
-      final _result = await _fetchData(event.userName, true);
+      final _result = await _fetchData(true);
       yield _result.fold(
         (fail) => fail is NoNextPageFail
             ? RepoIsEmpty()
-            : RepoLoadFailure(fail: fail, userName: event.userName),
+            : RepoLoadFailure(fail: fail),
         (repoList) => repoList.length < RemoteDataSource.ITEMS_PER_PAGE
             ? RepoLoadSuccess(
                 repos: repoList,
@@ -39,7 +39,7 @@ class RepoBloc extends Bloc<RepoEvent, RepoState> {
     }
     if (event is RepoFetchedNextPage) {
       final _state = state as RepoLoadSuccess;
-      final _result = await _fetchData(event.userName, false);
+      final _result = await _fetchData(false);
 
       yield _result.fold(
         (fail) => fail is NoNextPageFail
@@ -54,10 +54,8 @@ class RepoBloc extends Bloc<RepoEvent, RepoState> {
     }
   }
 
-  Future<Either<HttpFail, List<Repo>>> _fetchData(
-      String userName, bool isNewLoad) async {
+  Future<Either<HttpFail, List<Repo>>> _fetchData(bool isNewLoad) async {
     return await _repository.getRepoInfo(
-      userName: userName,
       isNewLoad: isNewLoad,
     );
   }

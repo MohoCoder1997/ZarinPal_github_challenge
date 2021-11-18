@@ -25,15 +25,12 @@ class UserLoadSuccess extends UserState {
 
 class UserLoadFailure extends UserState {
   final HttpFail fail;
-  final String userName;
 
   const UserLoadFailure({
     required this.fail,
-    required this.userName,
   });
   @override
   List<Object> get props => [
         fail,
-        userName,
       ];
 }

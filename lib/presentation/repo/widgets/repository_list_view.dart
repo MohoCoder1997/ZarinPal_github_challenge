@@ -51,7 +51,7 @@ class _RepositoryListViewState extends State<RepositoryListView> {
         message: state.fail.message ?? AppLocalizations.of(context)!.translate(LangKeys.LOAD_FAILED),
         onTapTryAgain: () {
           _repoBloc.add(RepoFetchedData(
-            userName: state.userName,
+       
           ));
         },
       );
@@ -85,7 +85,7 @@ class _RepositoryListViewState extends State<RepositoryListView> {
         !_state.isEndOfPage) {
       _repoBloc.add(
         RepoFetchedNextPage(
-          userName: widget.user.usreName,
+       
         ),
       );
     }
@@ -113,7 +113,7 @@ class _RepositoryListViewState extends State<RepositoryListView> {
             message: state.fail!.message ?? AppLocalizations.of(context)!.translate(LangKeys.LOAD_FAILED),
             onTapTryAgain: () {
               _repoBloc
-                  .add(RepoFetchedNextPage(userName: widget.user.usreName));
+                  .add(RepoFetchedNextPage());
             },
           );
   }

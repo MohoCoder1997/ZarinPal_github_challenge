@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
               create: (context) => sl<RepoBloc>()
                 ..add(
                   RepoFetchedData(
-                    userName: _textEditingController.text,
+                    
                   ),
                 ),
               child: RepoPage(user: state.user),
@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
             message: state.fail.message ??
                 AppLocalizations.of(context)!.translate(LangKeys.LOAD_FAILED),
             onTapTryAgain: () {
-              _userBloc.add(UserFetchedData(userName: state.userName));
+              _userBloc.add(UserFetchedData());
             },
           );
         return SizedBox();
@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
               : () {
                   if (_textEditingController.text != '')
                     _userBloc.add(
-                        UserFetchedData(userName: _textEditingController.text));
+                        UserFetchedData());
                   else
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(

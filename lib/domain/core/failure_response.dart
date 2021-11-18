@@ -19,4 +19,7 @@ class UnknowFail extends HttpFail {
 
 class NoConectionFail extends HttpFail {
   const NoConectionFail({required String message}) : super(message);
+
+}class AouthFail extends HttpFail {
+  const AouthFail({required String message}) : super(message);
 }

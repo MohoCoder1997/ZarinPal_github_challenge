@@ -17,9 +17,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   Stream<UserState> mapEventToState(UserEvent event) async* {
     yield UserLoadInProgress();
     if (event is UserFetchedData) {
-      final _result = await _repository.getUserInfo(userName: event.userName);
+      final _result = await _repository.getUserInfo();
       yield _result.fold(
-        (fail) => UserLoadFailure(fail: fail, userName: event.userName),
+        (fail) => UserLoadFailure(fail: fail),
         (user) => UserLoadSuccess(user: user),
       );
     }

@@ -27,7 +27,7 @@ class User extends Equatable {
       name: 'created_at', toJson: dateTimetojson, fromJson: dateTimeFromJson)
   final DateTime? createdAt;
 
-  User({
+  const User({
     required this.usreName,
     required this.name,
     required this.imgUrl,

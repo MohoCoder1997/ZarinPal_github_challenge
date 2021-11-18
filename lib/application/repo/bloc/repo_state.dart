@@ -41,17 +41,17 @@ class RepoLoadSuccess extends RepoState {
 
 class RepoLoadFailure extends RepoState {
   final HttpFail fail;
-  final String userName;
+
 
   const RepoLoadFailure({
     required this.fail,
-    required this.userName,
+ 
   });
 
   @override
   List<Object> get props => [
         fail,
-        userName,
+    
       ];
 }
 
