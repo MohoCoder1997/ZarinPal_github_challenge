@@ -31,9 +31,9 @@ class RemoteDataSource {
       });
       return _repoList;
     } else {
-      if (_shownPagesCount == 1)
-        return _repoList;
-      else
+      // if (_shownPagesCount == 1)
+      //   return _repoList;
+      // else
         throw NoNextPageFail(message: 'End of Items');
     }
   }

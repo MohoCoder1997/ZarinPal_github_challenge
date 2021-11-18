@@ -10,7 +10,7 @@ abstract class RepoEvent extends Equatable {
 class RepoFetchedData extends RepoEvent {
   final String userName;
 
-  RepoFetchedData({
+ const RepoFetchedData({
     required this.userName,
   });
 
@@ -23,7 +23,7 @@ class RepoFetchedData extends RepoEvent {
 class RepoFetchedNextPage extends RepoEvent {
   final String userName;
 
-  RepoFetchedNextPage({
+ const RepoFetchedNextPage({
     required this.userName,
   });
 

@@ -14,7 +14,7 @@ class RepoLoadSuccess extends RepoState {
   final bool isEndOfPage;
   final HttpFail? fail;
 
-  RepoLoadSuccess({
+  const RepoLoadSuccess({
     required this.repos,
     required this.isEndOfPage,
     this.fail,
@@ -28,7 +28,7 @@ class RepoLoadSuccess extends RepoState {
       RepoLoadSuccess(
         repos: repos ?? this.repos,
         isEndOfPage: isEndOfPage ?? this.isEndOfPage,
-        fail: fail ,
+        fail: fail,
       );
 
   @override
@@ -43,7 +43,7 @@ class RepoLoadFailure extends RepoState {
   final HttpFail fail;
   final String userName;
 
-  RepoLoadFailure({
+  const RepoLoadFailure({
     required this.fail,
     required this.userName,
   });

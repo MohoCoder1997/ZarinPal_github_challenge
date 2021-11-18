@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:github_challenge/domain/core/failure_response.dart';
 import 'package:github_challenge/domain/entities/repo.dart';
@@ -16,10 +17,7 @@ class RepoBloc extends Bloc<RepoEvent, RepoState> {
   @override
   Stream<RepoState> mapEventToState(RepoEvent event) async* {
     if (event is RepoFetchedData) {
-      final _result = await _repository.getRepoInfo(
-        userName: event.userName,
-        isNewLoad: true,
-      );
+      final _result = await _fetchData(event.userName, true);
       yield _result.fold(
         (fail) => fail is NoNextPageFail
             ? RepoIsEmpty()
@@ -41,10 +39,7 @@ class RepoBloc extends Bloc<RepoEvent, RepoState> {
     }
     if (event is RepoFetchedNextPage) {
       final _state = state as RepoLoadSuccess;
-      final _result = await _repository.getRepoInfo(
-        userName: event.userName,
-        isNewLoad: false,
-      );
+      final _result = await _fetchData(event.userName, false);
 
       yield _result.fold(
         (fail) => fail is NoNextPageFail
@@ -57,5 +52,13 @@ class RepoBloc extends Bloc<RepoEvent, RepoState> {
         ),
       );
     }
+  }
+
+  Future<Either<HttpFail, List<Repo>>> _fetchData(
+      String userName, bool isNewLoad) async {
+    return await _repository.getRepoInfo(
+      userName: userName,
+      isNewLoad: isNewLoad,
+    );
   }
 }

@@ -58,9 +58,9 @@ class _ThemeModeButtonState extends State<ThemeModeBottun> {
         onTap: () {
           setState(() {
             if (_settingBloc.state.themeData == appThemeData[AppTheme.Dark]) {
-              _settingBloc.add(ChangedTheme(appTheme: AppTheme.Light));
+              _settingBloc.add(SettingChangedTheme(appTheme: AppTheme.Light));
             } else {
-              _settingBloc.add(ChangedTheme(appTheme: AppTheme.Dark));
+              _settingBloc.add(SettingChangedTheme(appTheme: AppTheme.Dark));
             }
 
             isChangedMode = !isChangedMode;

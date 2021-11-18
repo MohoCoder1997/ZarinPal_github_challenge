@@ -13,29 +13,30 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
   final SharedPreferences sp;
 
   SettingBloc(this.sp)
-      : super(SettingState(
+      : super(
+          SettingState(
             themeData: sp.getInt('theme') != null
                 ? appThemeData[AppTheme.values[sp.getInt('theme')!]]
                 : appThemeData[AppTheme.Light],
             locale: sp.getString('locale') != null
                 ? Locale(sp.getString('locale')!)
-                : null));
+                : null,
+          ),
+        );
 
   @override
   Stream<SettingState> mapEventToState(
     SettingEvent event,
   ) async* {
-    if (event is ChangedTheme) {
+    if (event is SettingChangedTheme) {
       sp.setInt('theme', event.appTheme!.index);
-
       yield SettingState(
         locale: state.locale,
         themeData: appThemeData[AppTheme.values[sp.getInt('theme')!]],
       );
     }
-    if (event is ChangedLocale) {
+    if (event is SettingChangedLocale) {
       await sp.setString('locale', event.locale!.languageCode);
-
       yield new SettingState(
         locale: event.locale,
         themeData: state.themeData,

@@ -49,11 +49,11 @@ class _HomePageState extends State<HomePage> {
                   Locale('en', 'US'))
                 context
                     .read<SettingBloc>()
-                    .add(ChangedLocale(locale: Locale('fa', 'IR')));
+                    .add(SettingChangedLocale(locale: Locale('fa', 'IR')));
               else {
                 context
                     .read<SettingBloc>()
-                    .add(ChangedLocale(locale: Locale('en', 'US')));
+                    .add(SettingChangedLocale(locale: Locale('en', 'US')));
               }
             },
             icon: Icon(

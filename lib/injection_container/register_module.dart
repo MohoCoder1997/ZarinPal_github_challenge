@@ -13,7 +13,7 @@ abstract class RegisterModule {
   String get baseUrl => 'https://api.github.com/';
 
   @Named('DatePattern')
-  String get datePattern => 'YYYY-MM-DDTHH:MM:SSZ';
+  String get datePattern => 'yyyy-MM-ddTHH:mm:ssZ';
 
   @LazySingleton()
   Dio dio(@Named('BaseUrl') String url) => Dio(BaseOptions(baseUrl: url));
