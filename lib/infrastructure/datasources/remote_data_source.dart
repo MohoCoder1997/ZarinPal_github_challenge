@@ -17,11 +17,11 @@ class RemoteDataSource {
   RemoteDataSource(this._apiCallHandler);
 
   Future<UserDto> getUserInfo() async =>
-      UserDto.fromJson(jsonDecode(await _apiCallHandler.get(
+      UserDto.fromJson(await _apiCallHandler.get(
           url: 'user',
-          header: {"Authorization": "Breare ${RegisterConfig.token}" ,
+          header: {"Authorization": "token ${RegisterConfig.token}" ,
           "Accept": "application/json",
-          })));
+          }));
 
   Future<List<RepoDto>> getRepoInfo({
     required bool isNewLoad,
@@ -30,8 +30,13 @@ class RemoteDataSource {
     _shownPagesCount++;
     final List<RepoDto> _repoList = [];
     final _result = await _apiCallHandler.get(
-        url: 'users/repos?page=$_shownPagesCount&per_page=$ITEMS_PER_PAGE',
-        header: {"Authorization": "Breare ${RegisterConfig.token}"});
+        url: 'user/repos',
+        body: {
+          'page' : _shownPagesCount,
+          'per_page' : ITEMS_PER_PAGE
+        },
+        header: {"Authorization": "token ${RegisterConfig.token}"});
+      
     if ((_result as List).length != 0) {
       _result.forEach((repo) {
         _repoList.add(RepoDto.fromJson(repo));

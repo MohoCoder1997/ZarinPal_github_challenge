@@ -18,4 +18,9 @@ class UserFetchedData extends UserEvent{
 
 }
 
+class UserLogedOut extends UserEvent{
+
+
+}
+
 

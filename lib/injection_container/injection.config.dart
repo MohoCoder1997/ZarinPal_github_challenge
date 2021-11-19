@@ -46,6 +46,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.factoryAsync<_i8.SharedPreferences>(() => registerModule.prefs,
       preResolve: true);
   gh.factory<String>(() => registerModule.baseUrl, instanceName: 'BaseUrl');
+  gh.factory<String>(() => registerModule.baseUrlForLogin,
+      instanceName: 'BaseUrlForLogin');
   gh.factory<String>(() => registerModule.datePattern,
       instanceName: 'DatePattern');
   gh.factory<_i9.UrlLuncher>(() => _i9.UrlLuncher());

@@ -25,8 +25,8 @@ class HomePage extends StatelessWidget {
     final _authBloc = BlocProvider.of<AuthBloc>(context);
 
     final _spacer = SizedBox(
-                height: SC.blockVertical * 4,
-              );
+      height: SC.blockVertical * 4,
+    );
     return Scaffold(
       appBar: AppBar(
         title: AppBarView(
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
               _spacer,
               _logInBottun(_authBloc, _userBloc),
               _spacer,
-              _progressIndicator(_userBloc)
+              _progressIndicator(_userBloc, _authBloc)
             ],
           ),
         ),
@@ -75,7 +75,8 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  BlocConsumer<UserBloc, UserState> _progressIndicator(UserBloc _userBloc) {
+  BlocConsumer<UserBloc, UserState> _progressIndicator(
+      UserBloc _userBloc, AuthBloc _authBloc) {
     return BlocConsumer<UserBloc, UserState>(
       listener: (context, state) {
         if (state is UserLoadSuccess) {
@@ -104,6 +105,33 @@ class HomePage extends StatelessWidget {
               _userBloc.add(UserFetchedData());
             },
           );
+        if (state is UserLoadSuccess)
+          return Column(
+            children: [
+              Text(
+                'Hello ' + (state.user.name ?? 'User'),
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+              SizedBox(
+                height: SC.blockVertical * 2,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  _userBloc.add(UserFetchedData());
+                },
+                child: Text(AppLocalizations.of(context)!
+                    .translate(LangKeys.GO_TO_DETAIL)),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  _userBloc.add(UserLogedOut());
+                  _authBloc.add(AuthLogedOut());
+                },
+                child: Text(
+                    AppLocalizations.of(context)!.translate(LangKeys.LOGOUT)),
+              ),
+            ],
+          );
         return SizedBox();
       },
     );
@@ -117,7 +145,7 @@ class HomePage extends StatelessWidget {
           _userBloc.add(UserFetchedData());
         }
       },
-      builder: (context, state) { 
+      builder: (context, state) {
         if (state is AuthLoadInProgress)
           return Center(
             child: CircularProgressIndicator(),
@@ -126,7 +154,7 @@ class HomePage extends StatelessWidget {
           return _loginMessageText(context, state, _authbloc);
         if (state is AuthOpenLinkSuccess)
           return Center(
-            child: TextButton(
+            child: OutlinedButton(
               child: Text(
                 AppLocalizations.of(context)!.translate(LangKeys.SUBMIT),
                 style: Theme.of(context).textTheme.headline3,
@@ -170,39 +198,39 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Center _loginMessageText(BuildContext context, AuthLogeInLoadSuccess state, AuthBloc _authbloc) {
+  Center _loginMessageText(
+      BuildContext context, AuthLogeInLoadSuccess state, AuthBloc _authbloc) {
     return Center(
-          child: RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: AppLocalizations.of(context)!
-                      .translate(LangKeys.LOGIN_MESSAGE_FIRST),
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-                TextSpan(
-                  text: state.loginDevice.userCode,
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                TextSpan(
-                  text: AppLocalizations.of(context)!
-                      .translate(LangKeys.LOGIN_MESSAGE_SECONDE),
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-                TextSpan(
-                  text: '\n' + state.loginDevice.varificationUri,
-                  style: Theme.of(context).textTheme.headline3,
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      _authbloc.add(
-                          AuthOpenedLink(loginDevice: state.loginDevice));
-                    },
-                ),
-              ],
+      child: SelectableText.rich(
+        TextSpan(
+          children: [
+            TextSpan(
+              text: AppLocalizations.of(context)!
+                  .translate(LangKeys.LOGIN_MESSAGE_FIRST),
+              style: Theme.of(context).textTheme.subtitle2,
             ),
-          ),
-        );
+            TextSpan(
+              text: state.loginDevice.userCode,
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
+            TextSpan(
+              text: AppLocalizations.of(context)!
+                  .translate(LangKeys.LOGIN_MESSAGE_SECONDE),
+              style: Theme.of(context).textTheme.subtitle2,
+            ),
+            TextSpan(
+              text: '\n' + state.loginDevice.varificationUri,
+              style: Theme.of(context).textTheme.headline3,
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  _authbloc.add(AuthOpenedLink(loginDevice: state.loginDevice));
+                },
+            ),
+          ],
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
   }
 
   Image _githubLogo() {

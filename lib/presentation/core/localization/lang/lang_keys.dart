@@ -14,4 +14,6 @@ class LangKeys {
  static const String LOGIN_MESSAGE_SECONDE = "login_message_seconde";
  static const String SUBMIT = "submit";
  static const String WAIT = "wait";
+ static const String GO_TO_DETAIL = "go_to_repo_page";
+ static const String LOGOUT = "logOut";
 } 

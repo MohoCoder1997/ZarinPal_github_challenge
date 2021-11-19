@@ -13,5 +13,7 @@
     "login_message_seconde" : "\nPlease click to the link and complete your login",
     "submit" : "Submit Varify",
     "wait" : "Please Wait ...",
+    "go_to_repo_page" : "Go To Detail Page",
+    "logOut" : "LogOut",
     "snack_bar_txt" : "Please Enter Your UserName"
 }

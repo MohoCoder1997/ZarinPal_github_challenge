@@ -71,5 +71,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
       }
     }
+
+    if(event is AuthLogedOut){
+      _storageHandler.delete(key: 'token');
+      yield AuthTokenNotAvailable();
+    }
   }
 }

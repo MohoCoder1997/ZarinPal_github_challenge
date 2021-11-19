@@ -12,6 +12,9 @@ abstract class RegisterModule {
   @Named('BaseUrl')
   String get baseUrl => 'https://api.github.com/';
 
+    @Named('BaseUrlForLogin')
+  String get baseUrlForLogin => 'https://github.com/';
+
   @Named('DatePattern')
   String get datePattern => 'yyyy-MM-ddTHH:mm:ssZ';
 

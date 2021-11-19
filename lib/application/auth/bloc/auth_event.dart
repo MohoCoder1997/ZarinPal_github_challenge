@@ -13,6 +13,8 @@ class AuthFetchdToken extends AuthEvent {}
 
 class AuthChekedToken extends AuthEvent {}
 
+class AuthLogedOut extends AuthEvent {}
+
 class AuthOpenedLink extends AuthEvent {
   final LoginDevice loginDevice;
 

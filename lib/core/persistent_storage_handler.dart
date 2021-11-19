@@ -31,4 +31,6 @@ class PersistentStorageHandler {
   }
 
   load({required String key}) => _sharedPreferences.get(key);
+
+  delete({required String key}) => _sharedPreferences.remove(key);
 }

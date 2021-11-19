@@ -13,12 +13,13 @@ class ApiCallHandler {
 
   delete({required String url, Map? header, body}) {}
 
-  get({required String url, header}) async {
+  get({required String url, header , body}) async {
     _dio.options.baseUrl = sl<String>(instanceName: 'BaseUrl');
     print(header);
     final response = await _dio
         .get(
       url,
+      queryParameters: body,
       options: Options(
         headers: header != null ? header : null,
       ),
@@ -46,8 +47,7 @@ class ApiCallHandler {
   }
 
   post({required String url, header, body}) async {
-    print(jsonEncode(body));
-    _dio.options.baseUrl = 'https://github.com/';
+    _dio.options.baseUrl = sl<String>(instanceName: 'BaseUrlForLogin');
     print(_dio.options.baseUrl + url);
 
     final response = await _dio
