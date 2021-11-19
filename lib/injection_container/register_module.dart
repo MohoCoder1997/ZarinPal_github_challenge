@@ -16,7 +16,8 @@ abstract class RegisterModule {
   String get datePattern => 'yyyy-MM-ddTHH:mm:ssZ';
 
   @LazySingleton()
-  Dio dio(@Named('BaseUrl') String url) => Dio(BaseOptions(baseUrl: url));
+  Dio dio(@Named('BaseUrl') String url) =>
+      Dio(BaseOptions(baseUrl:  url));
 
   @LazySingleton()
   InternetConnectionChecker get internetChecker => InternetConnectionChecker();

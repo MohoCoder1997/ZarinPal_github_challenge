@@ -16,9 +16,9 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IRepository _repository;
   final PersistentStorageHandler _storageHandler;
-  final UrlLuncher _urlLuncher; 
+  final UrlLuncher _urlLuncher;
   AuthBloc(this._repository, this._storageHandler, this._urlLuncher)
-      : super(AuthInitial());
+      : super(AuthTokenNotAvailable());
 
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
@@ -34,11 +34,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
     }
     if (event is AuthFetchdToken) {
+      yield AuthLoadInProgress();
       final _result = await _repository.getAccessToken();
       yield await _result.fold(
         (fail) => AuthGetTokenLoadFail(fail: fail),
         (accessToken) async {
           RegisterConfig.token = accessToken.accessToken;
+          await _storageHandler.save(key: 'token', value: accessToken.accessToken);
           await _storageHandler.save(
               key: 'token', value: accessToken.accessToken);
           return AuthGetTokenLoadSuccess(accessToken: accessToken);
@@ -47,6 +49,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
 
     if (event is AuthChekedToken) {
+      yield AuthLoadInProgress();
       final _token = _storageHandler.load(key: 'token');
       if (_token != null) {
         RegisterConfig.token = _token;
@@ -62,19 +65,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final _result =
             await _urlLuncher.openLink(url: event.loginDevice.varificationUri);
         yield await _result.fold(
-            (fail) => AuthLogeInLoadSuccess(
-                loginDevice: event.loginDevice, urlFail: fail), (r) async {
-          final _result = await _repository.getAccessToken();
-          return _result.fold(
-            (fail) => AuthGetTokenLoadFail(fail: fail),
-            (accessToken) async {
-              RegisterConfig.token = accessToken.accessToken;
-              await _storageHandler.save(
-                  key: 'token', value: accessToken.accessToken);
-              return AuthGetTokenLoadSuccess(accessToken: accessToken);
-            },
-          );
-        });
+          (fail) => AuthLogeInLoadSuccess(
+              loginDevice: event.loginDevice, urlFail: fail),
+          (r) async => AuthOpenLinkSuccess(),
+        );
       }
     }
   }

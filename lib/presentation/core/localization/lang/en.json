@@ -2,12 +2,16 @@
     "user_name" : "UserName",
     "github_title" : "GitHub Api",
     "load_failed" : "Load Failed",
-    "search_btn_txt" : "Search",
+    "search_btn_txt" : "LogIn",
     "repo_app_bar_txt" : "UserInfo",
     "public_repos" : "publicRepos",
     "following" : "following",
     "followers" : "followers",
     "no_ropository" : "There is no repository",
     "try_again" : " Try Again",
+    "login_message_first" : "Your Login Code is  ",
+    "login_message_seconde" : "\nPlease click to the link and complete your login",
+    "submit" : "Submit Varify",
+    "wait" : "Please Wait ...",
     "snack_bar_txt" : "Please Enter Your UserName"
 }

@@ -33,7 +33,7 @@ class ZarinPalChallenge extends StatelessWidget {
           BlocProvider(
             create: (context) => sl<AuthBloc>()
               ..add(
-                AuthFetchdToken(),
+                AuthChekedToken(),
               ),
           ),
         ],

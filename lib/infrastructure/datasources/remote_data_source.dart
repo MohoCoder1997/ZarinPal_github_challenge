@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:github_challenge/domain/core/app_register_config.dart';
 import 'package:github_challenge/domain/core/failure_response.dart';
 import 'package:github_challenge/infrastructure/core/api_call_handler.dart';
@@ -15,9 +17,11 @@ class RemoteDataSource {
   RemoteDataSource(this._apiCallHandler);
 
   Future<UserDto> getUserInfo() async =>
-      UserDto.fromJson(await _apiCallHandler.get(
+      UserDto.fromJson(jsonDecode(await _apiCallHandler.get(
           url: 'user',
-          header: {"Authorization": "Breare ${RegisterConfig.token}"}));
+          header: {"Authorization": "Breare ${RegisterConfig.token}" ,
+          "Accept": "application/json",
+          })));
 
   Future<List<RepoDto>> getRepoInfo({
     required bool isNewLoad,

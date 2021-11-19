@@ -1,15 +1,21 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:github_challenge/domain/core/failure_response.dart';
+import 'package:github_challenge/injection_container/injection.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton()
 class ApiCallHandler {
   final Dio _dio;
+
   ApiCallHandler(this._dio);
 
   delete({required String url, Map? header, body}) {}
 
   get({required String url, header}) async {
+    _dio.options.baseUrl = sl<String>(instanceName: 'BaseUrl');
+    print(header);
     final response = await _dio
         .get(
       url,
@@ -40,10 +46,14 @@ class ApiCallHandler {
   }
 
   post({required String url, header, body}) async {
+    print(jsonEncode(body));
+    _dio.options.baseUrl = 'https://github.com/';
+    print(_dio.options.baseUrl + url);
+
     final response = await _dio
         .post(
       url,
-      data: body,
+      data: jsonEncode(body),
       options: Options(
         headers: header != null ? header : null,
       ),
@@ -62,8 +72,8 @@ class ApiCallHandler {
 
     if (response.statusCode == 200) {
       var jasonObject = response.data;
-      if(jasonObject['error'] != null)
-      throw AouthFail(message: jasonObject['error_description']);
+      if (jasonObject['error'] != null)
+        throw AouthFail(message: jasonObject['error_description']);
       return jasonObject;
     } else {
       throw UnknowFail(

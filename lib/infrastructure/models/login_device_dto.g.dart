@@ -9,7 +9,7 @@ part of 'login_device_dto.dart';
 LoginDeviceDto _$LoginDeviceDtoFromJson(Map<String, dynamic> json) {
   return LoginDeviceDto(
     expiresIn: json['expires_in'] as int,
-    interval: json['interval'] as String,
+    interval: json['interval'] as int,
     varificationUri: json['verification_uri'] as String,
     deviceCode: json['device_code'] as String,
     userCode: json['user_code'] as String,

@@ -9,7 +9,7 @@ class LoginDeviceDto extends LoginDevice {
   @JsonKey(name: 'expires_in')
   final int expiresIn;
   @JsonKey(name: 'interval')
-  final String interval;
+  final int interval;
 
   const LoginDeviceDto({
     required this.expiresIn,

@@ -24,8 +24,8 @@ final appThemeData = {
       ),
        headline3: TextStyle(
         color: Colors.blue,
-        fontWeight: FontWeight.bold,
-        fontSize: 22
+        fontWeight: FontWeight.w600,
+        fontSize: 20
       ),
       subtitle1: TextStyle(
         color: Color(0xff212121),

@@ -10,5 +10,8 @@ class LangKeys {
  static const String PUBLIC_REPOS = "public_repos";
  static const String NO_REPOSITORY = "no_ropository";
  static const String TRY_AGAIN = "try_again";
-
+ static const String LOGIN_MESSAGE_FIRST = "login_message_first";
+ static const String LOGIN_MESSAGE_SECONDE = "login_message_seconde";
+ static const String SUBMIT = "submit";
+ static const String WAIT = "wait";
 } 

@@ -14,9 +14,9 @@ class AuthFetchdToken extends AuthEvent {}
 class AuthChekedToken extends AuthEvent {}
 
 class AuthOpenedLink extends AuthEvent {
-  final String url;
+  final LoginDevice loginDevice;
 
  const AuthOpenedLink({
-   required this.url,
+   required this.loginDevice,
   });
 }

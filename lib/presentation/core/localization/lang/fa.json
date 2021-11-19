@@ -2,12 +2,16 @@
     "user_name": "نام کاربری",
     "github_title": "گیت هاب",
     "load_failed": "خطا در دریافت اطلاعات",
-    "search_btn_txt": "جستجو",
+    "search_btn_txt": "ورود",
     "repo_app_bar_txt": "اطلاعات کاربر",
     "public_repos": "ریپازیتوری های عمومی",
     "following": "دنبال شوندگان",
     "followers": "دنبال کنندگان",
     "no_ropository": "هیچ ریپازیتوری وجود ندارد",
     "snack_bar_txt": "لطفا نام کاربری خود را وارد کنید",
+    "login_message_first" : "کد لاگین شما ",
+    "login_message_seconde" : "\nلطفا با کلیک روی لینک زیر لاگین خود را تکمیل کنید ",
+    "submit" : "ثبت لاگین",
+    "wait" : "لطفا صبر کنید ...",
     "try_again": "تلاش مجدد "
 }

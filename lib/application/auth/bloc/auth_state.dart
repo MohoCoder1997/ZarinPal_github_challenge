@@ -7,13 +7,16 @@ abstract class AuthState extends Equatable {
   List<Object?> get props => [];
 }
 
-class AuthInitial extends AuthState {}
+
+class AuthTokenNotAvailable extends AuthState {}
 
 class AuthLoadInProgress extends AuthState {}
 
+class AuthOpenLinkSuccess extends AuthState {}
+
 class AuthTokenIsAvailable extends AuthState {}
 
-class AuthTokenNotAvailable extends AuthState {}
+
 
 class AuthLogeInLoadSuccess extends AuthState {
   final LoginDevice loginDevice;

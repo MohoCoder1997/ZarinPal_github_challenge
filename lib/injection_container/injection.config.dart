@@ -56,7 +56,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i12.PersistentStorageHandler>(
       () => _i12.PersistentStorageHandler(get<_i8.SharedPreferences>()));
   gh.factory<_i13.SettingBloc>(
-      () => _i13.SettingBloc(get<_i8.SharedPreferences>()));
+      () => _i13.SettingBloc(get<_i12.PersistentStorageHandler>()));
   gh.lazySingleton<_i14.ApiCallHandler>(
       () => _i14.ApiCallHandler(get<_i11.Dio>()));
   gh.factory<_i15.RemoteDataSource>(
