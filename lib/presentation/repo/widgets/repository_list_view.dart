@@ -31,7 +31,6 @@ class _RepositoryListViewState extends State<RepositoryListView> {
     return Expanded(
       child: BlocBuilder<RepoBloc, RepoState>(
         builder: (context, state) {
-          print(state);
           if (state is RepoLoadSuccess) return _loadSuccessView(state);
           if (state is RepoLoadFailure) return _loadFailureView(state);
           if (state is RepoIsEmpty) return _dataIsEmptyView();

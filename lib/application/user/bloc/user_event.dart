@@ -7,20 +7,11 @@ abstract class UserEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class UserFetchedData extends UserEvent{
-
- const UserFetchedData();
+class UserFetchedData extends UserEvent {
+  const UserFetchedData();
 
   @override
-  List<Object> get props => [
-
-  ];
-
+  List<Object> get props => [];
 }
 
-class UserLogedOut extends UserEvent{
-
-
-}
-
-
+class UserLogedOut extends UserEvent {}
